@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>老孙奶油草莓采摘园 - 新鲜水果农场</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-green: #2d6a4f;
+            --secondary-green: #52b788;
+            --accent-red: #e63946;
+            --warm-yellow: #ffb703;
+            --light-bg: #f8f9fa;
+            --dark-text: #1d3557;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            background: var(--light-bg);
+        }
+
+        /* 导航栏 */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-green);
+        }
+
+        /* 英雄区域 */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: 50px 50px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--accent-red);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(230, 57, 70, 0.5);
+        }
+
+        /* 产品介绍 */
+        .products {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-green);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            font-size: 1.5rem;
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-desc {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .product-tag {
+            display: inline-block;
+            background: var(--secondary-green);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+
+        /* 农场特色 */
+        .features {
+            background: white;
+            padding: 5rem 2rem;
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-desc {
+            color: #666;
+        }
+
+        /* 联系我们 */
+        .contact {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .contact-info {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-item {
+            margin: 1.5rem 0;
+            font-size: 1.2rem;
+        }
+
+        .contact-icon {
+            margin-right: 0.5rem;
+        }
+
+        /* 页脚 */
+        footer {
+            background: var(--dark-text);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 动画 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content, .product-card, .feature-item {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">🍓 老孙奶油草莓采摘园</a>
+            <ul class="nav-links">
+                <li><a href="#home">首页</a></li>
+                <li><a href="#products">产品</a></li>
+                <li><a href="#features">特色</a></li>
+                <li><a href="#contact">联系我们</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>🌾 新鲜水果 从农场到餐桌</h1>
+            <p>专业种植草莓、西瓜、羊角蜜、香瓜、水果西红柿等优质水果<br>绿色健康 · 现摘现卖 · 品质保证</p>
+            <a href="#products" class="cta-button">查看我们的产品</a>
+        </div>
+    </section>
+
+    <!-- 产品介绍 -->
+    <section class="products" id="products">
+        <h2 class="section-title">🍇 我们的水果</h2>
+        <p class="section-subtitle">精心培育 · 自然成熟 · 新鲜直达</p>
+        
+        <div class="product-grid">
+            <!-- 草莓 -->
+            <div class="product-card">
+                <img src="images/草莓.jpg" alt="新鲜草莓" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">🍓 奶油草莓</h3>
+                    <p class="product-desc">
+                        精选优质奶油草莓品种，果肉细腻多汁，甜度高，香气浓郁。
+                        采用有机肥料种植，无农药残留，安全健康。
+                    </p>
+                    <span class="product-tag">当季热销</span>
+                </div>
+            </div>
+
+            <!-- 西瓜 -->
+            <div class="product-card">
+                <img src="images/西瓜.jpg" alt="大棚西瓜" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">🍉 大棚西瓜</h3>
+                    <p class="product-desc">
+                        温室大棚种植，皮薄肉脆，汁多味甜。
+                        每一颗都经过精心挑选，保证最佳口感。
+                    </p>
+                    <span class="product-tag">夏季必备</span>
+                </div>
+            </div>
+
+            <!-- 羊角蜜 -->
+            <div class="product-card">
+                <img src="images/羊角蜜.jpg" alt="羊角蜜甜瓜" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">🍈 羊角蜜</h3>
+                    <p class="product-desc">
+                        独特羊角形状，果肉脆嫩，清甜爽口。
+                        富含维生素 C，消暑解渴佳品。
+                    </p>
+                    <span class="product-tag">特色品种</span>
+                </div>
+            </div>
+
+            <!-- 香瓜 -->
+            <div class="product-card">
+                <img src="images/香瓜.jpg" alt="新鲜香瓜" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">🍈 香瓜</h3>
+                    <p class="product-desc">
+                        香气浓郁，果肉细腻，甜而不腻。
+                        自然成熟，保留最原始的香甜味道。
+                    </p>
+                    <span class="product-tag">清香可口</span>
+                </div>
+            </div>
+
+            <!-- 水果西红柿 -->
+            <div class="product-card">
+                <img src="images/xihongshi.png" alt="水果西红柿" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">🍅 水果西红柿</h3>
+                    <p class="product-desc">
+                        可当水果吃的西红柿，酸甜适中，口感极佳。
+                        富含番茄红素，营养健康。
+                    </p>
+                    <span class="product-tag">营养丰富</span>
+                </div>
+            </div>
+
+            <!-- 采摘体验 -->
+            <div class="product-card">
+                <img src="images/草莓刚摘出来.png" alt="采摘体验" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">👨‍🌾 采摘体验</h3>
+                    <p class="product-desc">
+                        欢迎来农场亲自体验采摘乐趣！
+                        带孩子感受田园生活，品尝最新鲜的水果。
+                    </p>
+                    <span class="product-tag">亲子活动</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 农场特色 -->
+    <section class="features" id="features">
+        <h2 class="section-title">🌟 为什么选择我们</h2>
+        <p class="section-subtitle">品质 · 健康 · 服务</p>
+        
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="feature-icon">🌱</div>
+                <h3 class="feature-title">绿色种植</h3>
+                <p class="feature-desc">采用有机肥料，无化学农药，确保每一颗水果都健康安全</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">☀️</div>
+                <h3 class="feature-title">自然成熟</h3>
+                <p class="feature-desc">坚持自然成熟采摘，不催熟不打蜡，保留水果原本的味道</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🚚</div>
+                <h3 class="feature-title">新鲜直达</h3>
+                <p class="feature-desc">清晨采摘，当天送达，从田间到餐桌不超过 24 小时</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">💯</div>
+                <h3 class="feature-title">品质保证</h3>
+                <p class="feature-desc">严格筛选标准，不满意包退换，让您买得放心吃得安心</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我们 -->
+    <section class="contact" id="contact">
+        <div class="contact-info">
+            <h2 class="section-title" style="color: white;">📞 联系我们</h2>
+            <p style="margin-bottom: 2rem; opacity: 0.9;">欢迎咨询订购或预约采摘体验</p>
+            
+            <div class="contact-item">
+                <span class="contact-icon">📍</span>
+                农场地址：浙江省杭州市
+            </div>
+            <div class="contact-item">
+                <span class="contact-icon">📱</span>
+                联系电话：请咨询获取
+            </div>
+            <div class="contact-item">
+                <span class="contact-icon">⏰</span>
+                营业时间：每天 8:00 - 18:00
+            </div>
+            
+            <a href="tel:12345678901" class="cta-button" style="margin-top: 2rem; background: white; color: var(--primary-green);">立即致电</a>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <p>© 2024 老孙奶油草莓采摘园 · 新鲜水果农场</p>
+        <p style="margin-top: 0.5rem; opacity: 0.7; font-size: 0.9rem;">用心种植 · 诚信经营</p>
+    </footer>
+
+    <script>
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(255, 255, 255, 0.98)';
+                nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.15)';
+            } else {
+                nav.style.background = 'rgba(255, 255, 255, 0.95)';
+                nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            }
+        });
+    </script>
+</body>
+</html>
