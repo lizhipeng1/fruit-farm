@@ -238,6 +238,49 @@
             color: #666;
         }
 
+        /* 活动展示区域 */
+        .gallery {
+            padding: 5rem 2rem;
+            background: var(--light-bg);
+        }
+
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .gallery-caption {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .gallery-caption h3 {
+            color: var(--primary-green);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .gallery-caption p {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
         /* 联系我们 */
         .contact {
             padding: 5rem 2rem;
@@ -303,7 +346,7 @@
             }
         }
 
-        .hero-content, .product-card, .feature-item {
+        .hero-content, .product-card, .feature-item, .gallery-item {
             animation: fadeInUp 0.6s ease-out;
         }
     </style>
@@ -317,6 +360,7 @@
                 <li><a href="#home">首页</a></li>
                 <li><a href="#products">产品</a></li>
                 <li><a href="#features">特色</a></li>
+                <li><a href="#gallery">活动</a></li>
                 <li><a href="#contact">联系我们</a></li>
             </ul>
         </div>
@@ -442,6 +486,22 @@
                 <div class="feature-icon">💯</div>
                 <h3 class="feature-title">品质保证</h3>
                 <p class="feature-desc">严格筛选标准，不满意包退换，让您买得放心吃得安心</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 活动展示 -->
+    <section class="gallery" id="gallery">
+        <div class="gallery-container">
+            <h2 class="section-title">🎉 农场活动</h2>
+            <p class="section-subtitle">欢乐时光 · 美好回忆</p>
+            
+            <div class="gallery-item">
+                <img src="images/birthday-cake.jpg" alt="生日庆祝" class="gallery-image">
+                <div class="gallery-caption">
+                    <h3>🎂 生日庆祝</h3>
+                    <p>在老孙奶油草莓采摘园，我们不仅提供新鲜水果，还为客户创造美好回忆！<br>欢迎来这里举办生日派对、家庭聚会，享受田园风光与新鲜美食的完美结合。</p>
+                </div>
             </div>
         </div>
     </section>
