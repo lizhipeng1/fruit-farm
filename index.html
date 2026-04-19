@@ -619,23 +619,23 @@
         });
 
         // OpenStreetMap 地图初始化（使用 Leaflet）
-        const mapScript = document.createElement('link');
-        mapScript.rel = 'stylesheet';
-        mapScript.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
-        document.head.appendChild(mapScript);
+        const mapLink = document.createElement('link');
+        mapLink.rel = 'stylesheet';
+        mapLink.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+        document.head.appendChild(mapLink);
 
         const leafletScript = document.createElement('script');
         leafletScript.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
         leafletScript.onload = function() {
-            // 初始化地图，设置农场位置坐标（南京市江宁区和平社区 - 朱公村附近）
-            const map = L.map('map').setView([31.5520, 118.8550], 15);
+            // 初始化地图，设置农场位置坐标（南京市江宁区 - 朱公村附近）
+            const map = L.map('map').setView([31.5520, 118.8550], 14);
             
             // 加载 OpenStreetMap 图层
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap contributors'
+                attribution: '© OpenStreetMap'
             }).addTo(map);
             
-            // 添加标记
+            // 添加红色标记
             const marker = L.marker([31.5520, 118.8550]).addTo(map);
             
             // 添加弹窗
