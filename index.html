@@ -563,11 +563,6 @@
             <h2 class="section-title" style="color: white;">📞 联系我们</h2>
             <p style="margin-bottom: 2rem; opacity: 0.9;">欢迎咨询订购或预约采摘体验</p>
             
-            <!-- 地图 -->
-            <div class="map-container">
-                <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=118.8187%2C31.9139%2C118.8287%2C31.9239&amp;layer=mapnik&amp;marker=31.9189%2C118.8237" allowfullscreen></iframe>
-            </div>
-            
             <div class="contact-item">
                 <span class="contact-icon">📍</span>
                 农场地址：南京市江宁区和平社区 老孙奶油草莓采摘园
@@ -579,6 +574,17 @@
             <div class="contact-item">
                 <span class="contact-icon">📱</span>
                 联系电话：139****1863
+            </div>
+            
+            <!-- 高德地图嵌入 -->
+            <div class="map-container" style="margin-top: 1.5rem; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                <iframe id="map-frame" src="https://www.amap.com/search?query=南京市江宁区和平社区老孙奶油草莓采摘园&isShare=true" 
+                        width="100%" 
+                        height="400" 
+                        frameborder="0" 
+                        scrolling="no"
+                        style="border-radius: 15px;">
+                </iframe>
             </div>
             
             <a href="tel:13912931863" class="cta-button" style="margin-top: 2rem; background: white; color: var(--primary-green);">立即致电</a>
