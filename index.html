@@ -626,16 +626,16 @@
         const amapScript = document.createElement('script');
         amapScript.src = 'https://webapi.amap.com/maps?v=2.0&key=841e85352a2c49d5697d531350d8776a';
         amapScript.onload = function() {
-            // 初始化地图，设置农场位置坐标（南京市江宁区 - 朱公村附近）
+            // 初始化地图，设置农场位置坐标（南京市江宁区和平社区）
             const map = new AMap.Map('map', {
-                zoom: 15,
-                center: [118.8550, 31.5520],
+                zoom: 16,
+                center: [118.92471834899213, 31.78270502712039],
                 viewMode: '2D'
             });
             
             // 添加红色标记
             const marker = new AMap.Marker({
-                position: [118.8550, 31.5520],
+                position: [118.92471834899213, 31.78270502712039],
                 title: '老孙奶油草莓采摘园',
                 map: map
             });
@@ -655,12 +655,12 @@
             
             // 地图加载完成后打开信息窗口
             setTimeout(function() {
-                infoWindow.open(map, [118.8550, 31.5520]);
+                infoWindow.open(map, [118.92471834899213, 31.78270502712039]);
             }, 500);
             
             // 点击标记也显示信息窗口
             marker.on('click', function() {
-                infoWindow.open(map, [118.8550, 31.5520]);
+                infoWindow.open(map, [118.92471834899213, 31.78270502712039]);
             });
         };
         document.head.appendChild(amapScript);
