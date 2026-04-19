@@ -569,7 +569,7 @@
             </div>
             <div class="contact-item">
                 <span class="contact-icon">🗺️</span>
-                <a href="https://uri.amap.com/navigation?from=&to=南京市江宁区和平社区老孙奶油草莓采摘园&mode=car&src=mypage" target="_blank" style="color: white; text-decoration: underline;">点击导航到这里</a>
+                <a href="javascript:void(0)" onclick="openNavigation()" style="color: white; text-decoration: underline; cursor: pointer;">点击导航到这里</a>
             </div>
             <div class="contact-item">
                 <span class="contact-icon">📱</span>
@@ -622,6 +622,33 @@
         window._AMapSecurityConfig = {
             securityJsCode: '2fbfdc46b32a2066aff4e41141eccb2f'
         };
+        
+        // 打开高德地图导航函数
+        function openNavigation() {
+            const lat = 31.78270502712039;
+            const lng = 118.92471834899213;
+            const name = '老孙奶油草莓采摘园';
+            
+            // 高德地图 URL Scheme
+            const iosScheme = `iosamap://navi?sourceApplication=老孙草莓园&poiname=${encodeURIComponent(name)}&lat=${lat}&lon=${lng}&dev=0`;
+            const androidScheme = `amapuri://route/plan/?sourceApplication=老孙草莓园&dname=${encodeURIComponent(name)}&dlat=${lat}&dlon=${lng}&dev=0&m=0&t=0`;
+            
+            // 判断设备类型
+            const userAgent = navigator.userAgent.toLowerCase();
+            const isIOS = /iphone|ipad|ipod/.test(userAgent);
+            
+            // 尝试打开高德地图 APP
+            const scheme = isIOS ? iosScheme : androidScheme;
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = scheme;
+            document.body.appendChild(iframe);
+            
+            // 如果 APP 未安装，2 秒后跳转到高德地图网页版
+            setTimeout(function() {
+                window.location.href = `https://www.amap.com/search?query=${lat},${lng}&isShare=true`;
+            }, 2000);
+        }
         
         const amapScript = document.createElement('script');
         amapScript.src = 'https://webapi.amap.com/maps?v=2.0&key=841e85352a2c49d5697d531350d8776a';
