@@ -627,8 +627,8 @@
         const leafletScript = document.createElement('script');
         leafletScript.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
         leafletScript.onload = function() {
-            // 初始化地图，设置农场位置坐标（南京市江宁区和平社区）
-            const map = L.map('map').setView([31.9189, 118.8237], 15);
+            // 初始化地图，设置农场位置坐标（南京市江宁区和平社区 - 朱公村附近）
+            const map = L.map('map').setView([31.5520, 118.8550], 15);
             
             // 加载 OpenStreetMap 图层
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -636,7 +636,7 @@
             }).addTo(map);
             
             // 添加标记
-            const marker = L.marker([31.9189, 118.8237]).addTo(map);
+            const marker = L.marker([31.5520, 118.8550]).addTo(map);
             
             // 添加弹窗
             marker.bindPopup('<b>🍓 老孙奶油草莓采摘园</b><br>欢迎预约采摘体验！<br>📞 139****1863').openPopup();
