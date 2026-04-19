@@ -636,16 +636,32 @@
             // 添加红色标记
             const marker = new AMap.Marker({
                 position: [118.8550, 31.5520],
-                title: '老孙奶油草莓采摘园'
+                title: '老孙奶油草莓采摘园',
+                map: map
             });
-            marker.setMap(map);
             
-            // 添加信息窗口
+            // 添加信息窗口 - 使用纯文本避免 HTML 问题
+            const infoContent = '<div style="padding:10px;min-width:200px;">' +
+                '<h4 style="margin:0 0 8px 0;color:#333;">🍓 老孙奶油草莓采摘园</h4>' +
+                '<p style="margin:4px 0;color:#666;">欢迎预约采摘体验！</p>' +
+                '<p style="margin:4px 0;color:#666;">📞 139****1863</p>' +
+                '</div>';
+            
             const infoWindow = new AMap.InfoWindow({
-                content: '<div style="padding:8px;"><strong>🍓 老孙奶油草莓采摘园</strong><br>欢迎预约采摘体验！<br>📞 139****1863</div>',
-                offset: new AMap.Pixel(0, -30)
+                content: infoContent,
+                offset: new AMap.Pixel(0, -30),
+                autoMove: true
             });
-            infoWindow.open(map, [118.8550, 31.5520]);
+            
+            // 地图加载完成后打开信息窗口
+            setTimeout(function() {
+                infoWindow.open(map, [118.8550, 31.5520]);
+            }, 500);
+            
+            // 点击标记也显示信息窗口
+            marker.on('click', function() {
+                infoWindow.open(map, [118.8550, 31.5520]);
+            });
         };
         document.head.appendChild(amapScript);
     </script>
